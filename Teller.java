@@ -5,8 +5,8 @@ public class Teller {
         this.id = id;
     }
 
-    public void serveCustomer(Customer c) {
-        System.out.println("Teller " + id + " serves Customer " + c.id);
+    public void introduceToCustomer(Customer c) {
+        System.out.println("Teller " + id + " SAYS HELLO TO Customer " + c.id);
     }
 }
 
