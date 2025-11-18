@@ -1,3 +1,17 @@
-echo "*.class" >> .gitignore
-echo "*.log" >> .gitignore
+*.class
+*.log
 
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# in case of any build directories
+build/
+target/
+
+*.tmp
