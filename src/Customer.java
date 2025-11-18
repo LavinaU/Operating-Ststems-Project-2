@@ -10,15 +10,23 @@ public class Customer implements Runnable {
     @Override
     public void run() {
         enterBank();
-        // pick a teller (for rn first available)
-        Teller selectedTeller = tellers[id % tellers.length];
-        System.out.println("Customer " + id + " selects Teller " + selectedTeller.id);
-        selectedTeller.introduceToCustomer(this);
-    }
 
+        // pick a teller (round robbin)
+        Teller selectedTeller = tellers[id % tellers.length];
+        System.out.println("Customer " + id + " [Teller " + selectedTeller.id + "]: gives transaction");
+
+        selectedTeller.serveCustomer(this);
+
+        leaveBank();
+    }
 
     public void enterBank() {
         System.out.println("Customer " + id + " enters bank");
+    }
+
+    public void leaveBank() {
+        System.out.println("Customer " + id + " leaves bank");
+
     }
 }
 
