@@ -17,21 +17,21 @@ public class Customer implements Runnable {
         try {
             // simulate wait b4 entering bank
             Thread.sleep(BankSimulation.rand.nextInt(101));
+            BankSimulation.door.acquire(); // max 2 customers in bank
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        enterBank();
+        System.out.println("Customer " + id + " enters bank");
 
         // pick a teller (round robbin)
         Teller selectedTeller = tellers[id % tellers.length];
-        System.out.println("Customer " + id + " [Teller " + selectedTeller.id + "]: gives transaction");
+        System.out.println("Customer " + id + " [Teller " + selectedTeller.id + "]: gives transaction (" + transactionType + ")");
 
         selectedTeller.serveCustomer(this);
-    }
 
-    public void enterBank() {
-        System.out.println("Customer " + id + " enters bank");
+        BankSimulation.door.release();
+
     }
 
 }

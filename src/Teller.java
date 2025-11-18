@@ -1,11 +1,26 @@
 import java.util.concurrent.Semaphore;
 
-public class Teller {
+public class Teller implements Runnable {
     int id;
-    //Semaphore semaphore;
+    private volatile boolean running = true;
 
     public Teller(int id) {
         this.id = id;
+    }
+
+    // Teller thread loop (waits for customers to assign themselves)
+    @Override
+    public void run() {
+        System.out.println("Teller " + id + ": ready to serve");
+        BankSimulation.tellersReady.countDown();
+
+        while (running) {
+            try {
+                Thread.sleep(10); // small sleep to reduce busy wait
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void serveCustomer(Customer c) {

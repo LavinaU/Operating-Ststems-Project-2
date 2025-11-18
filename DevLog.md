@@ -44,3 +44,8 @@ Yayy! Working as expected. I added more interactions and added the manager and s
 - add bank opening condition & limit customer emtry to 2 at a time
 - teller interaction functionality final
 - make sure print statements are in the proper format
+
+## 2025-11-17 11:43
+### Thoughts
+Just in the nick of time, everything works!!! Tested throughly. Now I have the final version of BankSimulation.java with all teller/customer threads handled and semaphores working correctly!
+
