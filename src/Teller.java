@@ -2,28 +2,47 @@ import java.util.concurrent.Semaphore;
 
 public class Teller {
     int id;
-    Semaphore semaphore;
+    //Semaphore semaphore;
 
-    public Teller(int id, Semaphore semaphore) {
+    public Teller(int id) {
         this.id = id;
-        this.semaphore = semaphore;
     }
 
     public void serveCustomer(Customer c) {
+        System.out.println("Teller " + id + "[" + c.id + "]: asks for transaction");
+
+        // if withdraw,then interact w manager
+        if (c.transactionType.equals("Withdraw")) {
+            try {
+                System.out.println("Teller " + id + "[" + c.id + "]: going to manager");
+
+                BankSimulation.manager.acquire();
+
+                System.out.println("Teller " + id + "[" + c.id + "]: interacting with manager");
+                Thread.sleep(BankSimulation.rand.nextInt(26) + 5); // 5 to30 ms
+                System.out.println("Teller " + id + "[" + c.id + "]: done with manager");
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                BankSimulation.manager.release();
+            }
+        }
+
+        // go to safe, MAX 2 tellers
         try {
-            semaphore.acquire(); // only 1 customer at a time
-            System.out.println("Teller " + id + "[Customer " + c.id + "]: asks for transaction");
-
-            //simulate processing transac
-            System.out.println("Teller " + id + " [Customer " + c.id + "]: processing transaction");
-            Thread.sleep((long)(Math.random() * 20 + 10)); // 10-30ms sleep
-            System.out.println("Teller " + id + " [Customer " + c.id + "]: transaction done");
-
-            semaphore.release();
-
+            System.out.println("Teller " + id + "[" + c.id + "]: waiting for safe");
+            BankSimulation.safe.acquire();
+            System.out.println("Teller " + id + "[" + c.id + "]: using safe");
+            Thread.sleep(BankSimulation.rand.nextInt(41) + 10); // 10 to 50 ms
+            System.out.println("Teller " + id + "[" + c.id + "]: done with safe");
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            BankSimulation.safe.release();
         }
+
+        System.out.println("Customer " + c.id + " leaves bank");
 
     }
 }

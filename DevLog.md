@@ -34,3 +34,13 @@ Yay! Fixed the issues in IntelliJ and also cleaned up the repo. Also implemented
 - add random transaction type, deposit or withdrawl
 - manager semaphore & safe semaphoreS
 - simulated sleep & print statements
+
+## 2025-11-17 11:04
+### Thoughts
+Yayy! Working as expected. I added more interactions and added the manager and safe semaphores, and simulated transactions and the customer leaving. Now I just have the final commit left. The scope of the final commit is a bit alrge, but that is fine considering I have two earlier working versions. I will make sure to test everything rigourously though for safety.
+
+### My Plan
+- scale to 50 customers & 3 tellers
+- add bank opening condition & limit customer emtry to 2 at a time
+- teller interaction functionality final
+- make sure print statements are in the proper format

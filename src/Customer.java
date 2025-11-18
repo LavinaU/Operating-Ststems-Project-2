@@ -1,14 +1,26 @@
 public class Customer implements Runnable {
     int id;
     Teller[] tellers;
+    String transactionType;
+
 
     public Customer(int id, Teller[] tellers) {
         this.id = id;
         this.tellers = tellers;
+
+        // randomly decide transaction type
+        this.transactionType = BankSimulation.rand.nextBoolean() ? "Deposit" : "Withdraw" ;
     }
 
     @Override
     public void run() {
+        try {
+            // simulate wait b4 entering bank
+            Thread.sleep(BankSimulation.rand.nextInt(101));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         enterBank();
 
         // pick a teller (round robbin)
@@ -16,17 +28,11 @@ public class Customer implements Runnable {
         System.out.println("Customer " + id + " [Teller " + selectedTeller.id + "]: gives transaction");
 
         selectedTeller.serveCustomer(this);
-
-        leaveBank();
     }
 
     public void enterBank() {
         System.out.println("Customer " + id + " enters bank");
     }
 
-    public void leaveBank() {
-        System.out.println("Customer " + id + " leaves bank");
-
-    }
 }
 
