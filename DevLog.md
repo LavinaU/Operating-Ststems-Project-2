@@ -25,3 +25,12 @@ I ran into a huge issue with IntelliJ yesterday evening, which was of my own doi
 ### My Plan
 - resolve sourcfe file issue
 - if it doesn't work, testing my OnlineGDB sidequest in small bites and committing it
+
+## 2025-11-17 10:30
+### Thoughts
+Yay! Fixed the issues in IntelliJ and also cleaned up the repo. Also implemented entering bank/selecting teller/give transaction/wait for teller to process/& leave functionalities. Semaphore makes sure there is only one customer at the time. I also added random sleep to simul;ate transaction processing. the output follows the format needed. Now onto the next! It should be pretty fast as I had two sessions to refine this.
+
+### My Plan
+- add random transaction type, deposit or withdrawl
+- manager semaphore & safe semaphoreS
+- simulated sleep & print statements
