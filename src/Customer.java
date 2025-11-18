@@ -1,3 +1,5 @@
+package src;
+
 public class Customer implements Runnable {
     int id;
     Teller[] tellers;
